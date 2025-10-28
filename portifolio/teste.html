@@ -1,0 +1,404 @@
+<!-- formação-certificacoes.html
+     Seção: Formação & Certificações (single file)
+     - Data-theme (light/dark)
+     - Paleta: Minimalista + Futurismo Clean (Accent #3B82F6)
+     - Timeline (premium, inspirador)
+     - Cards de certificação (minimalistas premium)
+-->
+
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Formação & Certificações — Seção</title>
+  <style>
+    /* -------------------------
+       Paleta & Variáveis
+       ------------------------- */
+    :root{
+      /* Light mode (base) */
+      --bg: #F7F9FC;
+      --surface: #FFFFFF;
+      --text-primary: #0A0A0C;
+      --text-secondary: #4A4E58;
+      --primary: #1A1F36;
+      --secondary: #64748B;
+      --accent: #3B82F6;
+      --stroke: #E2E8F0;
+      --success: #10B981;
+      --warning: #FACC15;
+      --danger: #EF4444;
+
+      /* layout spacing & type */
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-sm: 8px;
+      --glass-blur: 10px;
+
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    /* Dark theme overrides */
+    html[data-theme="dark"] {
+      --bg: #0D1117;
+      --surface: #161B22;
+      --text-primary: #F5F7FA;
+      --text-secondary: #A8B2C1;
+      --primary: #E2E8F0;
+      --secondary: #94A3B8;
+      --accent: #3B82F6;
+      --stroke: #1F242C;
+    }
+
+    /* -------------------------
+       Reset & Base
+       ------------------------- */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text-primary);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:36px;
+      display:flex;
+      justify-content:center;
+      font-size:16px;
+    }
+
+    /* Container */
+    .section-wrap{
+      width:100%;
+      max-width:980px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)) ;
+      border-radius:18px;
+      padding:28px;
+      box-shadow: 0 6px 30px rgba(11,13,18,0.06);
+      border:1px solid var(--stroke);
+    }
+
+    /* Header row with title + theme toggle */
+    .section-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:20px;
+    }
+    .section-title{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size:20px;
+      letter-spacing:-0.2px;
+      color:var(--primary);
+    }
+    .section-title p{
+      margin:0;
+      font-size:13px;
+      color:var(--text-secondary);
+    }
+
+    /* Theme toggle simple */
+    .controls{display:flex;gap:10px;align-items:center}
+    .theme-btn{
+      background:transparent;
+      border:1px solid var(--stroke);
+      color:var(--text-secondary);
+      padding:8px 12px;
+      border-radius:10px;
+      font-size:14px;
+      cursor:pointer;
+      transition:all .18s ease;
+    }
+    .theme-btn:hover{ transform:translateY(-2px) }
+
+    /* Layout columns */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:28px;
+      align-items:start;
+    }
+
+    /* -------------------------
+       TIMELINE (Left column)
+       ------------------------- */
+    .timeline{
+      position:relative;
+      padding-left:20px;
+    }
+
+    /* vertical axis */
+    .timeline::before{
+      content:"";
+      position:absolute;
+      left:12px;
+      top:0;
+      bottom:0;
+      width:3px;
+      background: linear-gradient(180deg, var(--stroke), transparent 60%);
+      border-radius:4px;
+    }
+
+    .timeline-item{
+      position:relative;
+      margin-bottom:34px;
+      padding:18px 18px 18px 36px;
+      background:var(--surface);
+      border-radius:var(--radius-md);
+      border:1px solid var(--stroke);
+      box-shadow: 0 6px 20px rgba(17,20,30,0.03);
+      transition:transform .22s ease, box-shadow .22s ease;
+    }
+    html[data-theme="dark"] .timeline-item{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+      box-shadow: 0 6px 30px rgba(3,6,12,0.6);
+      border:1px solid var(--stroke);
+    }
+    .timeline-item:hover{ transform: translateY(-6px); box-shadow: 0 10px 40px rgba(13,16,25,0.12) }
+
+    /* dot marker */
+    .timeline-item::before{
+      content:"";
+      position:absolute;
+      left:-6px;
+      top:20px;
+      width:18px;
+      height:18px;
+      border-radius:50%;
+      background:var(--bg);
+      border:3px solid var(--accent);
+      box-shadow: 0 4px 18px rgba(59,130,246,0.12);
+    }
+
+    .timeline-item header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:8px;
+    }
+    .timeline-item .course{
+      font-weight:600;
+      font-size:16px;
+      color:var(--primary);
+      margin:0;
+    }
+    .timeline-item .meta{
+      font-size:13px;
+      color:var(--text-secondary);
+      margin:0;
+    }
+
+    .timeline-item .desc{
+      margin-top:8px;
+      color:var(--text-secondary);
+      font-size:15px;
+    }
+
+    .timeline-item .tags{
+      margin-top:12px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .tag{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(59,130,246,0.08);
+      color:var(--accent);
+      border:1px solid rgba(59,130,246,0.12);
+    }
+
+    /* -------------------------
+       CERTIFICATES (Right column)
+       ------------------------- */
+    .cert-block{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .cert-grid{
+      display:grid;
+      gap:12px;
+    }
+    .cert-card{
+      background:var(--surface);
+      border-radius:12px;
+      padding:14px;
+      border:1px solid var(--stroke);
+      box-shadow: 0 6px 20px rgba(11,13,18,0.03);
+      display:flex;
+      gap:12px;
+      align-items:center;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .cert-card:hover{
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(3,6,20,0.10);
+    }
+    .cert-icon{
+      width:44px;
+      height:44px;
+      border-radius:10px;
+      display:inline-grid;
+      place-items:center;
+      font-weight:700;
+      color:var(--accent);
+      border:1px solid rgba(59,130,246,0.12);
+      background: linear-gradient(180deg, rgba(59,130,246,0.06), rgba(59,130,246,0.02));
+    }
+    .cert-content h4{
+      margin:0;
+      font-size:14px;
+      color:var(--primary);
+    }
+    .cert-content p{
+      margin:0;
+      margin-top:6px;
+      font-size:13px;
+      color:var(--text-secondary);
+    }
+
+    /* footer small note */
+    .small-note{
+      margin-top:10px;
+      font-size:13px;
+      color:var(--text-secondary);
+    }
+
+    /* -------------------------
+       Responsive
+       ------------------------- */
+    @media (max-width:880px){
+      .grid{
+        grid-template-columns:1fr;
+      }
+      body{ padding:18px }
+      .section-wrap{ padding:18px }
+    }
+
+  </style>
+</head>
+<body>
+  <main class="section-wrap" aria-labelledby="formacao-title">
+
+    <div class="section-header">
+      <div class="section-title">
+        <h2 id="formacao-title">Formação & Certificações</h2>
+        <p>Timeline da graduação e certificados — visual clean, premium e profissional.</p>
+      </div>
+
+      <div class="controls" aria-hidden="false">
+        <button class="theme-btn" id="toggle-theme" aria-pressed="false" title="Alternar tema (claro/escuro)">
+          Alternar tema
+        </button>
+      </div>
+    </div>
+
+    <section class="grid" role="region" aria-label="Formação e certificações">
+      <!-- TIMELINE -->
+      <div class="timeline" aria-labelledby="timeline-heading">
+        <h3 id="timeline-heading" style="font-size:13px;color:var(--text-secondary);margin:0 0 12px 0">Linha do Tempo</h3>
+
+        <!-- ITEM: Graduação (UNIPAM) -->
+        <article class="timeline-item" aria-labelledby="course-1">
+          <header>
+            <div>
+              <h4 id="course-1" class="course">Sistemas de Informação — UNIPAM</h4>
+              <div class="meta">2025 – Atual · Cursando</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:12px;color:var(--text-secondary)">Graduação</div>
+            </div>
+          </header>
+
+          <p class="desc">
+            Formação orientada para o desenvolvimento de soluções tecnológicas eficientes, baseadas em código limpo, experiência do usuário e inovação. 
+            Construindo uma base sólida em programação, arquitetura de sistemas e boas práticas do mercado tech.
+          </p>
+
+          <div class="tags" aria-hidden="true">
+            <span class="tag">Desenvolvimento de Software</span>
+            <span class="tag">Arquitetura de Sistemas</span>
+            <span class="tag">Banco de Dados</span>
+            <span class="tag">UX · Boas Práticas</span>
+          </div>
+        </article>
+
+        <!-- Você pode duplicar timeline-item para adicionar histórico adicional no futuro -->
+      </div>
+
+      <!-- CERTIFICATES -->
+      <aside class="cert-block" aria-labelledby="certs-heading">
+        <h3 id="certs-heading" style="font-size:13px;color:var(--text-secondary);margin:0 0 8px 0">Certificações</h3>
+
+        <div class="cert-grid">
+          <!-- Cert 1 (placeholder) -->
+          <div class="cert-card" role="article" aria-label="Certificação 1">
+            <div class="cert-icon" aria-hidden="true">✓</div>
+            <div class="cert-content">
+              <h4>Nome do Certificado</h4>
+              <p>Plataforma • Ano • Breve nota (ex.: Concluído)</p>
+            </div>
+          </div>
+
+          <!-- Cert 2 (placeholder) -->
+          <div class="cert-card" role="article" aria-label="Certificação 2">
+            <div class="cert-icon" aria-hidden="true">★</div>
+            <div class="cert-content">
+              <h4>Outro Certificado</h4>
+              <p>Plataforma • Ano • Breve nota</p>
+            </div>
+          </div>
+
+          <!-- Card para adicionar -->
+          <div class="cert-card" role="article" aria-label="Adicionar certificação">
+            <div class="cert-icon" aria-hidden="true">＋</div>
+            <div class="cert-content">
+              <h4>Adicionar Certificação</h4>
+              <p>Insira título, plataforma e ano — exibido com estilo minimalista.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="small-note">Dica: mantenha apenas certificações relevantes e recentes; destaque plataforma e competência obtida.</p>
+      </aside>
+    </section>
+
+  </main>
+
+  <script>
+    // Theme toggle usando data-theme no <html>
+    (function () {
+      const root = document.documentElement;
+      const btn = document.getElementById('toggle-theme');
+
+      // Inicial: se o usuário já tem preferência no localStorage, usa. Senão, mantém 'light'.
+      const saved = localStorage.getItem('theme-preference');
+      if (saved === 'dark' || saved === 'light') {
+        root.setAttribute('data-theme', saved);
+        btn.setAttribute('aria-pressed', saved === 'dark');
+      }
+
+      function toggleTheme() {
+        const current = root.getAttribute('data-theme') || 'light';
+        const next = current === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme-preference', next);
+        btn.setAttribute('aria-pressed', next === 'dark');
+      }
+
+      btn.addEventListener('click', toggleTheme);
+    })();
+  </script>
+</body>
+</html>
